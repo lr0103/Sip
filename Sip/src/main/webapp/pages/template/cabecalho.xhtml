@@ -7,6 +7,20 @@
 	xmlns:p="http://primefaces.org/ui">
 		<ui:define name="titulo">AUTORIZAÇÃO</ui:define>
 		<h:form id="formCabecalho">
-				<span>Bem Vindo #{indexForm.usuario.nome}</span>
+			<table style="float:left">
+				<tr style="font-weight:bold;color: #394B62;">
+					<td >Cadastros</td>
+					<td><div style="width:50px"/></td>
+					<td>Consultas</td>
+				</tr>
+				<tr><td></td></tr>
+				<tr>
+					<td>Pessoas</td>
+					<td></td>
+					<td>Consultas</td>
+				</tr>
+			</table>
+			<h:inputText value=""  
+				styleClass="textoProcurar"/>
 		</h:form>
 </ui:composition>

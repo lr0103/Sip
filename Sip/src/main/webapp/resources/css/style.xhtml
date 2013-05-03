@@ -153,8 +153,24 @@
 				width:86px;
 				color: rgb(59,77,100);
 				text-align:left;
-				background: url("#{request.contextPath}/resources/image/icon/up.png") no-repeat right;
-				background-size:12px 12px;
+				background: url("#{request.contextPath}/resources/image/icon/down.png") no-repeat right;
+				background-size:13px 13px;
+				background-position: 73px 15px;
+			}
+			
+			.textoProcurar{
+				border: none;
+			   width:200px; 
+			   border-radius:8px; 
+			   background: url('#{request.contextPath}/resources/image/icon/search.png') no-repeat right;
+			   background-size:15px 15px;
+			   background-position: 183px 2px;
+			   height: 17px; 
+			   color:#FFF;
+			   float:right;
+			   margin-right:10px;
+			   margin-top:10px;
+			   background-color: #707b86
 			}
 	</style>
 	
@@ -166,7 +182,6 @@
 		        function() {
 		        	var logo = '<img style="float:left; width:200px" src="#{request.contextPath}/resources/image/logo/sip.png"/>';
 		        	$(".menuBarLogo").html(logo);
-
 		        } 
 		    );
 		//]]>

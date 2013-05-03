@@ -19,11 +19,22 @@
 		        </p:submenu>  
 		  
 		        <f:facet name="options">  
-		        	<div class="menuBarBotaoProcurar">
+		        	<div onclick="procurarClick()" class="menuBarBotaoProcurar">
 		        		 <div>PROCURAR</div>
 		        	</div>
-		        	
-		        	
+		        	<script>
+						function procurarClick(){
+							if($('.top').is(':visible')){
+								$('.top').hide();
+								$('.menuBarBotaoProcurar div').css("background-image","url('#{request.contextPath}/resources/image/icon/down.png')");
+							}  else {
+								$('.top').show(); 
+								$('.menuBarBotaoProcurar div').css("background-image","url('#{request.contextPath}/resources/image/icon/up.png')");
+							}
+							
+
+							}
+		        	</script>
 		            <!--  p:commandButton  styleClass="menuBarBotao" type="button" onclick="dlgLoggout.show();" value="Sair" icon="ui-icon-extlink" /-->  
 		        </f:facet>  
 		    </p:menubar>  
