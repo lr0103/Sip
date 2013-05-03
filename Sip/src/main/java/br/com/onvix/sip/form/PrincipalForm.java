@@ -24,7 +24,10 @@ public class PrincipalForm extends Form{
 	public PrincipalForm(){
 		usuario = new Usuario();
 	}
-	
+	/**
+	 * Logar
+	 * @param actionEvent
+	 */
 	public void login(ActionEvent actionEvent){
 	//public void login(){
 		UsuarioControle usuarioControle = new UsuarioControle();
