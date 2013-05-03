@@ -39,6 +39,7 @@ public class PrincipalForm extends Form{
 		getContext().addCallbackParam("logado", sessaoAtiva);
 	}
 	
+	//Logoff do Sistema
 	public void logoff(){
 		((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false)).invalidate(); 
 	}
