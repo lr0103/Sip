@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+				xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<meta content='text/html; charset=ISO-8859-1' http-equiv='Content-Type'/>
+	<!-- STYLE EM CSS -->
+	<style type="text/css">
+		body {
+			margin: 0; 
+			padding: 0;
+			font-family: tahoma, arial, helvetica, sans-serif;
+			font-size:75%;
+			
+			background: #f3f3f3 url("#{request.contextPath}/resources/image/body/background.png") repeat-x 0 0;
+
+		}
+			
+		html, body{height: 100%}
+		
+		/*TEMPLATE*/
+			.main{ width:800px; margin-left: auto; margin-right: auto;height:100%;}
+			.main td{vertical-align:top; border:0px solid}
+			.main .top{height:100px; display:none}
+			.main .middle{height: 100%;}
+			.main .bottom{height:100px;}
+			/** --USADO QUANDO O MENU FICA NA ESQUERDA E O CONTEUDO NA DIREITA
+			.main .middle .menu {float:left;width:19.5%; height:100%}
+			.main .middle .conteudo {float:right;width:80%;height:100%}
+			*/
+			.main .menu{height:46px;padding-bottom: 5px;padding-left:1px;padding-right:11px}
+			.main .conteudo{ 
+				margin-left: auto; margin-right: 1px;
+				background:#FFFFFF; 
+				margin-top:5px;
+				border-left: 3px solid #a8a8a8; 
+				border-bottom: 3px solid #a8a8a8; 
+				border-right: 3px solid #a8a8a8; 
+				margin-left:1px;
+				-webkit-border-bottom-right-radius: 5px;
+				-webkit-border-bottom-left-radius: 5px;
+				-moz-border-radius-bottomright: 5px;
+				-moz-border-radius-bottomleft: 5px;
+				border-bottom-right-radius: 5px;
+				border-bottom-left-radius: 5px;	
+				height:800px;
+			}
+		
+			.main .rodape{
+				clear: both;
+				text-align: center;
+				color: #7C7C7C;
+				font-size: 9.5px;
+				margin: 0 auto;
+			}
+		 /*MENU*/
+			.menuBar{
+				width:100% !important;
+				
+				background: #3b4d64;
+				background: -moz-linear-gradient(top, #3b4d64 0%, #243246 100%);
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3b4d64), color-stop(100%,#243246)); 
+				background: -webkit-linear-gradient(top, #3b4d64 0%,#243246 100%);
+				background: -o-linear-gradient(top, #3b4d64 0%,#243246 100%);
+				background: -ms-linear-gradient(top, #3b4d64 0%,#243246 100%);
+				background: linear-gradient(to bottom, #3b4d64 0%,#243246 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b4d64', endColorstr='#243246',GradientType=0 );
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+			}
+			
+			.menuBar .ui-icon{
+				display:none !important;
+				
+			}
+			
+			.menuBarTitulo .ui-menuitem-text{
+				color: #C9D4E4;
+				font-size: 12px;
+				font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+				text-transform: uppercase;
+				height:30px !important;
+				line-height:30px !important;
+				padding-left:5px !important;
+			}
+			
+			.menuBarTitulo {
+				
+				position: relative !important;
+				background: url("#{request.contextPath}/resources/image/menu/separator.png") no-repeat left;
+				-moz-border-radius: 0px !important;
+				-webkit-border-radius: 0px !important;
+				border-radius: 0px !important;
+			}
+			
+			.menuBarTitulo .ui-state-hover {
+				border: 0px !important;
+				background: transparent !important;
+				color: #313131;
+				-moz-box-shadow: 0 0 0px #85b2cb !important;
+				-webkit-box-shadow: 0px 0px0px #85b2cb !important;
+				box-shadow: 0px 0px 0px #85b2cb !important;	
+				padding-left: 5px !important;
+				padding-right: 5px !important;
+				padding-top: 6px !important;
+			}
+			
+			.menuBarTitulo .ui-corner-all {
+				-moz-border-radius: 0px !important;
+				-webkit-border-radius: 0px !important;
+				border-radius: 0px !important;
+			}
+					
+			.menuBarItem .ui-menuitem-text{
+				color: #000;
+				font-size: 12px;
+				font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+				text-transform: uppercase;
+				height:12px !important;
+				line-height:12px !important;
+			}
+
+			
+			.menuBarBotaoProcurar{
+				margin-right:5px;
+				margin-top:-6px; 
+        		height:45px; 
+        		width:95px; 
+        		line-height:45px;
+        		
+        		background-color: rgb(186, 195, 205);
+        		
+        		-webkit-border-bottom-right-radius: 5px;
+				-webkit-border-bottom-left-radius: 5px;
+				-moz-border-radius-bottomright: 5px;
+				-moz-border-radius-bottomleft: 5px;
+				border-bottom-right-radius: 5px;
+				border-bottom-left-radius: 5px;
+				-webkit-box-shadow: 1px 1px 1px 0px rgba(20, 20, 20, 30);
+				box-shadow: 1px 1px 1px 0px rgba(20, 20, 20, 30);
+			}
+			
+			.menuBarBotaoProcurar :hover{
+				cursor:pointer;
+			}
+			
+			.menuBarBotaoProcurar div{
+				margin-left:4px;
+				font-size: 12px;
+				font-weight:bold;
+				font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+				width:86px;
+				color: rgb(59,77,100);
+				text-align:left;
+				background: url("#{request.contextPath}/resources/image/icon/up.png") no-repeat right;
+				background-size:12px 12px;
+			}
+	</style>
+	
+	<!-- STYLE EM JAVASCRIPT -->
+	<script type="text/javascript">
+		//<![CDATA[
+			/*MENU*/
+			$(".menuBar").ready(
+		        function() {
+		        	var logo = '<img style="float:left; width:200px" src="#{request.contextPath}/resources/image/logo/sip.png"/>';
+		        	$(".menuBarLogo").html(logo);
+
+		        } 
+		    );
+		//]]>
+	</script>
+</ui:composition>

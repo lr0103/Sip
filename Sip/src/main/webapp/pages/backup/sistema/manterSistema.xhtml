@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<p:dialog id="manterSistemaIncluir"  header="Sistema" widgetVar="manterSistemaIncluir" onShow="updateIncluir();" resizable="false"  width="300" showEffect="blind" hideEffect="blind"> 
+	    <h:form id="formManterSistemaIncluir">
+	    <h:panelGrid id="displaySistemaIncluir" columns="2">  
+            <h:outputText value="Descricao:" /> 
+            <h:inputText disabled="#{sistemaForm.acao == 'CONSULTAR'}" value="#{sistemaForm.dscSistema}" /> 
+		</h:panelGrid> 
+		<center>
+        	<p:commandButton ajax="false" rendered="#{sistemaForm.acao != 'CONSULTAR'}" value="Salvar" update="tabelaSistema" action="#{sistemaForm.persistir}"></p:commandButton>
+            <p:commandButton ajax="false" rendered="#{sistemaForm.acao == 'CONSULTAR'}" value="Voltar" oncomplete="manterSistema.hide();"></p:commandButton>
+        </center> 
+            <p:remoteCommand name="updateIncluir" action="#{sistemaForm.limparCamposIncluir}" update="formManterSistemaIncluir"/>
+		</h:form>
+	</p:dialog>
+	
+	<p:dialog id="manterSistema"  header="Sistema" widgetVar="manterSistema" onShow="updateAlterarConsultar();" resizable="false"  width="300" showEffect="blind" hideEffect="blind"> 
+	    <h:form id="formManterSistema">
+	    <h:panelGrid id="displaySistema" columns="2">  
+	           <h:outputText value="Descricao:" /> 
+	           <h:inputText disabled="#{sistemaForm.acao == 'CONSULTAR'}" value="#{sistemaForm.dscSistema}" /> 
+		</h:panelGrid> 
+		<center>
+	       	<p:commandButton ajax="false" rendered="#{sistemaForm.acao != 'CONSULTAR'}" value="Salvar" update="tabelaSistema" action="#{sistemaForm.persistir}"></p:commandButton>
+	           <p:commandButton ajax="false" rendered="#{sistemaForm.acao == 'CONSULTAR'}" value="Voltar" oncomplete="manterSistema.hide();"></p:commandButton>
+	       </center> 
+	           <p:remoteCommand name="updateAlterarConsultar" update="formManterSistema"/>
+		</h:form>
+	</p:dialog>
+	
+	
+	
+	
+	<p:confirmDialog message="Confirma a exclusão?" width="200" showEffect="explode" hideEffect="explode" header="Atencao" severity="alert" widgetVar="confirma">
+	<center>
+	<h:outputText style="color:red;" value="Atenção: Ao Excluir este Sistema você estará excluindo todos seus menus e perfis de acesso!" />
+	<h:form id="formExcluirSistema">	
+		<p:commandButton value="Sim" ajax="false" action="#{sistemaForm.persistir}" oncomplete="confirma.hide()" />
+		<p:commandButton value="Nao" onclick="confirma.hide()" type="button" />
+	</h:form>
+	</center>
+	</p:confirmDialog>
+	
+</ui:composition>

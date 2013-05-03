@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+		<!-- LOGOFF -->
+		<h:form id="formLogout">
+			<p:confirmDialog id="confirmLogoff" closeOnEscape="true" message="Deseja sair do sistema?"  header="Mensagens do Sistema" severity="alert" width="250" widgetVar="dlgLoggout" >          
+		        <span style="float:right">
+			        <p:commandButton id="confirm" value="Sim" action="#{principalForm.logoff()}" ajax="false" />  
+			        <p:commandButton id="decline" value="Não" onclick="dlgLoggout.hide()" type="button" />      
+		        </span>    
+		    </p:confirmDialog>  
+	    </h:form>
+
+	    <!-- LOGIN -->
+		<p:dialog id="dialogLogin"  width="300" visible="true" header="Login" resizable="false" showEffect="slide" hideEffect="slide" fixedCenter="true" widgetVar="dlgLogin" rendered="#{!principalForm.sessaoAtiva}">  
+		    <h:form id="formLogin">
+		        <h:panelGrid  columns="2" cellpadding="5" style="width:100%">
+          		    <p:inputText value="#{principalForm.usuario.login}" style="width:100%"  id="username" required="true" label="Usuário" requiredMessage="O Campo 'Usuário' é obrigatório" />  
+          		    <p:watermark value="Usuário" for="username"></p:watermark>
+		              
+		            <p:password value="#{principalForm.usuario.senha}" style="width:100%"   id="password" required="true" label="Senha" requiredMessage="O Campo 'Senha' é obrigatório" />  
+		            <p:watermark value="Senha" for="password"></p:watermark>
+		              
+		            <f:facet name="footer">  
+		            	<p:remoteCommand name="uptMsgLogin" update=":dialogMensagem"></p:remoteCommand>
+	               		<p:commandButton id="loginButton" style="float:right; right:6px;" value="Login" update="formLogin" oncomplete="handleLoginRequest(xhr, status, args); setTimeout(uptMsgLogin,700);" actionListener="#{principalForm.login}"/>  
+	           		</f:facet>  
+		        </h:panelGrid>
+		    </h:form> 
+		</p:dialog>  
+</composition>

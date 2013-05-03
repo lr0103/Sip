@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" 
+	xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+ 	
+ 	<persistence-unit name="sip-pu" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <non-jta-data-source/>
+        <class>br.com.onvix.sip.entity.Referenciapessoal</class>
+        <class>br.com.onvix.sip.entity.Favorecido</class>
+        <class>br.com.onvix.sip.entity.Telefone</class>
+        <class>br.com.onvix.sip.entity.Acessoperfil</class>
+        <class>br.com.onvix.sip.entity.Sistema</class>
+        <class>br.com.onvix.sip.entity.Cargo</class>
+        <class>br.com.onvix.sip.entity.Funcao</class>
+        <class>br.com.onvix.sip.entity.Acessousuario</class>
+        <class>br.com.onvix.sip.entity.PerfilusuarioPK</class>
+        <class>br.com.onvix.sip.entity.Pessoa</class>
+        <class>br.com.onvix.sip.entity.Pessoajuridica</class>
+        <class>br.com.onvix.sip.entity.Funcaousuarioacesso</class>
+        <class>br.com.onvix.sip.entity.Telefonepessoa</class>
+        <class>br.com.onvix.sip.entity.Funcaoacessoperfil</class>
+        <class>br.com.onvix.sip.entity.Funcionario</class>
+        <class>br.com.onvix.sip.entity.Perfilusuario</class>
+        <class>br.com.onvix.sip.entity.Perfilacesso</class>
+        <class>br.com.onvix.sip.entity.TelefonepessoaPK</class>
+        <class>br.com.onvix.sip.entity.Mensalistapf</class>
+        <class>br.com.onvix.sip.entity.Mensalistapj</class>
+        <class>br.com.onvix.sip.entity.Usuario</class>
+        <class>br.com.onvix.sip.entity.Modulosistema</class>
+        <class>br.com.onvix.sip.entity.Pessoafisica</class>
+        <class>br.com.onvix.sip.entity.Menusistema</class>
+        <class>br.com.onvix.sip.entity.Dependente</class>
+        <class>br.com.onvix.sip.entity.Serventia</class>
+        <properties>
+            <!-- CONEXÃO BANCO -->
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/sip"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="root"/>
+            <!-- CONFIGURAÇÕES HIBERNATE -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <!-- CONFIGURAÇÕES POOL CONEXÕES (C3P0) -->
+            <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+            <property name="hibernate.c3p0.min_size" value="0"/>
+            <property name="hibernate.c3p0.max_size" value="25"/>
+            <property name="hibernate.c3p0.max_statements" value="50"/>
+            <property name="hibernate.c3p0.timeout" value="600"/>
+        </properties>
+	</persistence-unit>
+</persistence>

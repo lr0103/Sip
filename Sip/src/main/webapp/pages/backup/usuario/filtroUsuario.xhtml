@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/pages/template/template.xhtml">
+	<ui:define name="body">
+	<h:form id="formFiltroUsuario">
+	<center>
+		<p:panel  id="painelManutencao"  style="width:550px; height:500px; overflow:auto;  margin-top:50px;" header="Manutenção de Usuários" >
+			<h:panelGrid columns="1">
+				<h:panelGroup id="filtros">
+					<h:panelGrid columns="3" cellspacing="3">
+						<h:outputText id="labelFiltroPor" value="Filtrar Por: " />
+						<h:outputText id="labelFiltro" rendered="#{!empty usuarioForm.filtrarPor &amp;&amp; usuarioForm.filtrarPor != 'Todos'}" value="#{usuarioForm.filtrarPor} do Usuário" /> 
+						<h:outputText id="labelFiltro2" rendered="#{empty usuarioForm.filtrarPor || usuarioForm.filtrarPor == 'Todos'}" value="" />
+						<p:spacer></p:spacer>
+						<p:selectOneMenu style="width:100px" effect="drop" value="#{usuarioForm.filtrarPor}"  onchange="updateFiltro();">
+							<f:selectItems  value="#{usuarioForm.listaFiltrarPor}" />
+						</p:selectOneMenu>
+						<p:inputText rendered="#{!empty usuarioForm.filtrarPor &amp;&amp; usuarioForm.filtrarPor != 'Todos'}" value="#{usuarioForm.dscFiltro}"/>
+						<p:commandButton value="Filtrar" ajax="false" action="#{usuarioForm.filtrar}"/>
+					</h:panelGrid>	
+				</h:panelGroup>
+				
+				<p:remoteCommand name="updateFiltro" update="filtros"></p:remoteCommand>
+				<p:spacer height="10"></p:spacer>
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+			<h:panelGroup id="linksManterUsuario">
+				<p:commandLink oncomplete="manterUsuario.show();" rendered="#{usuarioForm.inserir}" disabled="true">
+					<h:outputText value="Novo"/>
+					<f:setPropertyActionListener target="#{usuarioForm.acao}" value="INCLUIR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{usuarioForm.selecionado &amp;&amp; usuarioForm.alterar}" disabled="true" oncomplete="manterUsuario.show()">
+					<h:outputText value="Alterar"/>
+					<f:setPropertyActionListener target="#{usuarioForm.acao}" value="ALTERAR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{usuarioForm.selecionado  &amp;&amp; usuarioForm.consultar}" disabled="true" oncomplete="manterUsuario.show()">
+					<h:outputText value="Consultar"/>
+					<f:setPropertyActionListener target="#{usuarioForm.acao}" value="CONSULTAR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{usuarioForm.selecionado  &amp;&amp; usuarioForm.excluir}" disabled="true" oncomplete="confirma.show()">
+					<h:outputText value="Excluir"/>
+					<f:setPropertyActionListener target="#{usuarioForm.acao}" value="EXCLUIR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{grupoUsuarioForm.consultando}"
+							   oncomplete="parent.document.getElementById('#{usuarioForm.consIdCodRetorno}').value = '#{usuarioForm.usuarioSelecionado.codUsuaImediata}';
+							 	           parent.document.getElementById('#{usuarioForm.consIdDescRetorno}').value = '#{usuarioForm.usuarioSelecionado.nmeUSUA}';
+							   			   parent.$.fn.colorbox.close();" >
+					<h:outputText value="Voltar"/>
+				</p:commandLink>
+			</h:panelGroup>
+			</h:panelGrid>
+			<p:dataTable id="tabelaUsuario" selection="#{usuarioForm.usuarioSelecionado}" 
+			onRowSelectUpdate="linksManterUsuario,formManterUsuario,formExluirUsuario" 
+			selectionMode="single" emptyMessage="Nenhum Usuario encontrado" 
+			style="width:500px;margin-top:5px;" value="#{usuarioForm.listaUsuarioFiltro}" 
+			var="item" rows="8"  paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                 paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}"  >
+	        		<p:column style="width:70px">  
+            			<f:facet name="header">  
+                			<h:outputText style="width:70px" value="Codigo" />  
+            			</f:facet>  
+            			<h:outputText style="width:70px" value="#{item.codUsuaImediata}" />  
+        			</p:column>
+        			<p:column style="width:70px">  
+            			<f:facet name="header">  
+                			<h:outputText style="width:70px" value="Usuario" />  
+            			</f:facet>  
+            			<h:outputText style="width:70px" value="#{item.nmeUSUA}" />  
+        			</p:column>
+			</p:dataTable>
+		</p:panel>
+	</center>
+	</h:form>
+	<ui:include src="/pages/geral/usuario/manterUsuario.xhtml"/>
+	</ui:define>
+
+</ui:composition>

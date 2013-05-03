@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+	<f:view contentType="text/html">
+		
+		<h:head>
+			<!-- TITULO -->
+			<title>SIP</title>
+			<!-- CSS -->
+			<ui:include src="/resources/css/style.xhtml" />
+			<!-- JAVASCRIPT -->
+			<ui:include src="/resources/js/funcoes.xhtml" />
+			<!-- MENSAGENS -->
+			<ui:include src="/pages/template/mensagem.xhtml" />
+		</h:head>
+		
+		<h:body id="pageContent">
+		
+			<ui:include src="/pages/principal/login.xhtml" />
+		
+			<p:outputPanel id="panelPrincipal" rendered="#{principalForm.sessaoAtiva}">
+				<table class="main">
+					<tr class="top">
+						<td>
+							<!-- CABECALHO -->
+							<div class="cabecalho">
+								<ui:include src="/pages/template/cabecalho.xhtml" />
+							</div>
+						</td>
+					</tr>
+					<tr  class="middle">
+						<td>
+							<!-- MENU -->
+							<div class="menu">
+								<ui:include src="/pages/principal/menu.xhtml" />
+							</div>
+							<!-- CONTEUDO -->
+							<div class="conteudo">
+								<ui:insert name="conteudo"></ui:insert>
+							</div>
+						</td>
+					</tr>
+					<tr  class="bottom">
+						<td>
+							<!-- RODAPE -->
+							<div class="rodape">
+								<ui:include src="/pages/template/rodape.xhtml" />
+							</div>
+						</td>
+					</tr>
+				</table>
+			</p:outputPanel>
+		</h:body>
+	</f:view>
+</html>

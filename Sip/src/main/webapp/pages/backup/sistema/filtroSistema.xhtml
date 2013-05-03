@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/pages/template/template.xhtml">
+	<ui:define name="body">
+	<h:form id="formFiltroSistema">
+	<center>
+		<p:panel  id="painelManutencao" style="width:550px; height:400px; margin-top:80px;" header="Manutenção de Sistemas" >
+			<h:panelGrid columns="1">
+			<h:panelGroup>
+				<h:outputText value="Descrição: "/>
+				<p:inputText value="#{sistemaForm.dscSistemaFiltro}"/>
+				<p:commandButton value="Filtrar" ajax="false" action="#{sistemaForm.filtrar}"/>
+			</h:panelGroup>
+			<p:spacer height="10"></p:spacer>
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+			<h:panelGroup id="linksManterSistema">
+				<p:commandLink oncomplete="manterSistemaIncluir.show();" rendered="#{sistemaForm.inserir}">
+					<h:outputText value="Novo"/>
+					<f:setPropertyActionListener target="#{sistemaForm.acao}" value="INCLUIR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{sistemaForm.selecionado &amp;&amp; sistemaForm.alterar}" oncomplete="manterSistema.show()">
+					<h:outputText value="Alterar"/>
+					<f:setPropertyActionListener target="#{sistemaForm.acao}" value="ALTERAR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{sistemaForm.selecionado &amp;&amp; sistemaForm.consultar}" oncomplete="manterSistema.show()">
+					<h:outputText value="Consultar"/>
+					<f:setPropertyActionListener target="#{sistemaForm.acao}" value="CONSULTAR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{sistemaForm.selecionado &amp;&amp; sistemaForm.excluir}" oncomplete="confirma.show()">
+					<h:outputText value="Excluir"/>
+					<f:setPropertyActionListener target="#{sistemaForm.acao}" value="EXCLUIR" />
+				</p:commandLink>
+			</h:panelGroup>
+			
+			</h:panelGrid>
+			<p:dataTable id="tabelaSistema" selection="#{sistemaForm.sistemaSelecionado}" 
+			onRowSelectUpdate="linksManterSistema,formManterSistema,formExluirSistema" 
+			selectionMode="single" emptyMessage="Nenhum Sistema encontrado" 
+			style="width:500px;margin-top:5px;" value="#{sistemaForm.listaSistemaFiltro}" 
+			var="sistema" rows="8"  paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                 paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}"  >
+	        		<p:column>  
+            			<f:facet name="header">  
+                			<h:outputText value="Sistema" />  
+            			</f:facet>  
+            			<h:outputText  style="font-size:11px" value="#{sistema.descricao}" />  
+        			</p:column>
+			</p:dataTable>
+		</p:panel>
+	</center>
+	</h:form>
+	<ui:include src="/pages/geral/sistema/manterSistema.xhtml"/>
+	</ui:define>
+
+</ui:composition>

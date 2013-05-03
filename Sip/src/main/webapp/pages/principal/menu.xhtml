@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="formMenu">
+			<p:menubar   styleClass="menuBar">
+			 	<p:submenu styleClass="menuBarLogo"/>
+		        
+		        <p:submenu styleClass="menuBarTitulo" label="Cadastro">  
+		            <p:menuitem styleClass="menuBarItem" value="Usuário" url="/pages/cadastro/usuario.jsf" />  
+		        </p:submenu>  
+		        
+		          <p:submenu styleClass="menuBarTitulo" label="Cadastro">  
+		            <p:menuitem styleClass="menuBarItem" value="Usuário" url="/pages/cadastro/usuario.jsf" />  
+		        </p:submenu>  
+		  
+		        <f:facet name="options">  
+		        	<div class="menuBarBotaoProcurar">
+		        		 <div>PROCURAR</div>
+		        	</div>
+		        	
+		        	
+		            <!--  p:commandButton  styleClass="menuBarBotao" type="button" onclick="dlgLoggout.show();" value="Sair" icon="ui-icon-extlink" /-->  
+		        </f:facet>  
+		    </p:menubar>  
+	</h:form>
+
+</ui:composition>

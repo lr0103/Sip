@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/pages/template/template.xhtml">
+	<ui:define name="body">
+	<h:form id="formFiltroGrupoUsuario">
+	<center>
+		<p:panel  id="painelManutencao" style="width:550px; height:400px; margin-top:80px;" header="Manutenção de Grupo de Usuarios" >
+			<h:panelGrid columns="1">
+			<h:panelGroup>
+				<h:outputText value="Descrição: "/>
+				<p:inputText value="#{grupoUsuarioForm.dscGrupoUsuarioFiltro}"/>
+				<p:commandButton value="Filtrar" ajax="false" action="#{grupoUsuarioForm.filtrar}"/>
+			</h:panelGroup>
+			<p:spacer height="10"></p:spacer>
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+			<h:panelGroup id="linksManterGrupoUsuario" >
+				<p:commandLink oncomplete="manterGrupoUsuario.show();" rendered="#{grupoUsuarioForm.inserir}">
+					<h:outputText value="Novo"/>
+					<f:setPropertyActionListener target="#{grupoUsuarioForm.acao}" value="INCLUIR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{grupoUsuarioForm.selecionado &amp;&amp; grupoUsuarioForm.alterar}" oncomplete="manterGrupoUsuario.show()">
+					<h:outputText value="Alterar"/>
+					<f:setPropertyActionListener target="#{grupoUsuarioForm.acao}" value="ALTERAR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{grupoUsuarioForm.selecionado &amp;&amp; grupoUsuarioForm.consultar}" oncomplete="manterGrupoUsuario.show()">
+					<h:outputText value="Consultar"/>
+					<f:setPropertyActionListener target="#{grupoUsuarioForm.acao}" value="CONSULTAR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{grupoUsuarioForm.selecionado &amp;&amp; grupoUsuarioForm.excluir}" oncomplete="confirma.show()">
+					<h:outputText value="Excluir"/>
+					<f:setPropertyActionListener target="#{grupoUsuarioForm.acao}" value="EXCLUIR" />
+				</p:commandLink>
+				<p:spacer width="10"></p:spacer>
+				<p:commandLink rendered="#{grupoUsuarioForm.consultando}"
+							   oncomplete="parent.document.getElementById('#{grupoUsuarioForm.consIdCodRetorno}').value = '#{grupoUsuarioForm.grupoUsuarioSelecionado.idgrupousuario}';
+							 	           parent.document.getElementById('#{grupoUsuarioForm.consIdDescRetorno}').value = '#{grupoUsuarioForm.grupoUsuarioSelecionado.descricao}';
+							   			   parent.$.fn.colorbox.close();" >
+					<h:outputText value="Voltar"/>
+				</p:commandLink>
+			</h:panelGroup>
+			</h:panelGrid>
+			
+			<p:dataTable id="tabelaGrupoUsuario" selection="#{grupoUsuarioForm.grupoUsuarioSelecionado}" 
+			onRowSelectUpdate="linksManterGrupoUsuario,formManterGrupoUsuario,formExluirGrupoUsuario" 
+			selectionMode="single" emptyMessage="Nenhum Grupo de Usuarios encontrado" 
+			style="width:500px;margin-top:5px;" value="#{grupoUsuarioForm.listaGrupoUsuarioFiltro}" 
+			var="grupo" rows="8"  paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                 paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}"  >
+	        		<p:column style="width:150px">  
+            			<f:facet name="header">  
+                			<h:outputText value="Grupo de Usuarios" />  
+            			</f:facet>  
+            			<h:outputText style="font-size:11px" value="#{grupo.descricao}" />  
+        			</p:column>
+        			<p:column>  
+            			<f:facet name="header">  
+                			<h:outputText value="Observação" />  
+            			</f:facet>  
+            			<h:outputText style="font-size:11px" value="#{grupo.observacao}" />  
+        			</p:column>
+			</p:dataTable>
+		</p:panel>
+	</center>
+	</h:form>
+	<ui:include src="/pages/geral/direitoacesso/grupousuario/manterGrupoUsuario.xhtml"/>
+	</ui:define>
+
+</ui:composition>

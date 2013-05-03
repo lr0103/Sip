@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<h:form id="formTreeMenuPerfil" rendered="#{!empty perfilAcessoForm.listaMenu}">
+		<center> 
+			<p:spacer height="10" rendered="#{perfilAcessoForm.existeGrupoUsuario}"></p:spacer>
+			<h:panelGroup id="linksGruposDoUsuario" rendered="#{perfilAcessoForm.existeGrupoUsuario}">
+				<p:commandLink oncomplete="dialogGrupo.show();">
+					<h:outputText value="Editar Grupos do Usuário"/>
+				</p:commandLink>
+			</h:panelGroup>
+		</center>
+		<p:spacer height="10" rendered="#{perfilAcessoForm.existeGrupoUsuario}"></p:spacer>
+	    <p:treeTable style="font-size:11px" rows="100" expanded="true"  value="#{perfilAcessoForm.menu}" var="menu"> 
+			<p:column>  
+	            <f:facet name="header">  
+	                <h:outputText value="Menu" style="width:100px" /> 
+	            </f:facet>
+	            <h:inputText  style="width:100px;font-size:11px;border : 0px; background:transparent;" value="#{menu.labelMenu}" /> 
+	        </p:column>
+	        <p:column>  
+	            <f:facet name="header">  
+	                <h:outputText style="width:50px" value="Inserir" /> 
+	            </f:facet>
+	            <center style="width:50px">
+	            <p:selectBooleanCheckbox rendered="#{!empty menu.link}" value="#{menu.inserir}" disabled="#{menu.inserirDoGrupo}">
+	            	<p:ajax listener="#{perfilAcessoForm.gravarPerfil}"/>
+	            </p:selectBooleanCheckbox>
+	            </center>
+	        </p:column>
+	        <p:column>  
+	            <f:facet name="header">  
+	                <h:outputText style="width:50px" value="Alterar"  /> 
+	            </f:facet>
+	            <center style="width:50px">  
+	            <p:selectBooleanCheckbox rendered="#{!empty menu.link}" value="#{menu.alterar}" disabled="#{menu.alterarDoGrupo}">
+					<p:ajax  listener="#{perfilAcessoForm.gravarPerfil}"/>
+	            </p:selectBooleanCheckbox>
+	            </center>        
+	        </p:column> 
+	        <p:column>  
+	            <f:facet name="header">  
+	                <h:outputText style="width:50px" value="Consultar" /> 
+	            </f:facet>
+	            <center style="width:50px">
+	            <p:selectBooleanCheckbox rendered="#{!empty menu.link}" disabled="#{menu.consultarDoGrupo}" value="#{menu.consultar}" >
+					<p:ajax listener="#{perfilAcessoForm.gravarPerfil}"/>
+	            </p:selectBooleanCheckbox>
+	             </center> 
+	        </p:column>
+	        <p:column>  
+	            <f:facet name="header">  
+	                <h:outputText style="width:50px" value="Excluir"  /> 
+	            </f:facet>
+	            <center style="width:50px">  
+	            <p:selectBooleanCheckbox rendered="#{!empty menu.link}" disabled="#{menu.excluirDoGrupo}" value="#{menu.excluir}" >
+					<p:ajax listener="#{perfilAcessoForm.gravarPerfil}"/>
+	            </p:selectBooleanCheckbox>
+	            </center>
+			</p:column> 
+	    </p:treeTable>
+	    <p:remoteCommand name="updateGrupo" action="#{perfilAcessoForm.gravarGrupoDoUsuario}" update="formTreeMenuPerfil,mensagem"/>
+	</h:form>
+	<p:dialog id="dialogGrupo" widgetVar="dialogGrupo" onHide="updateThis();updateGrupo();" header="Grupos do Usuário" onShow="updateThis();" resizable="false" height="400"  width="600" showEffect="blind" hideEffect="blind"> 
+		<center>	  
+	    <h:form id="formGrupoUsuario">
+ 			<p:pickList  rendered="#{!empty perfilAcessoForm.listaMenu &amp;&amp; perfilAcessoForm.existeGrupoUsuario}" 
+ 						 value="#{perfilAcessoForm.grupoDoUsuario}" var="grupo"  iconOnly="true" effect="slide" itemLabel="#{grupo.descricao}" itemValue="#{grupo}" 
+ 						 converter="grupoUsuarioConverter">
+ 			        <f:facet name="sourceCaption">Grupos de Usuários</f:facet>  
+        			<f:facet name="targetCaption">Grupos do(a) #{perfilAcessoForm.labelUsuarioTarget}</f:facet>  
+ 			</p:pickList>
+        	<p:remoteCommand name="updateThis" update="formGrupoUsuario,mensagem"/>
+       	</h:form>
+		</center>
+	</p:dialog>
+</ui:composition>

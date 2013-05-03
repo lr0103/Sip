@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<p:dialog id="manterGrupoUsuario" header="Grupo de Usuários" widgetVar="manterGrupoUsuario" onShow="updateThis();" resizable="false"  width="400" showEffect="blind" hideEffect="blind"> 
+	    <h:form id="formManterGrupoUsuario">
+	    <h:panelGrid id="displayGrupoDesc" columns="2">  
+            <h:outputText value="Descricao:" /> 
+            <h:inputText style="width:150px" disabled="#{grupoUsuarioForm.acao == 'CONSULTAR'}" value="#{grupoUsuarioForm.dscGrupoUsuario}" /> 
+            <h:outputText value="Observação:" /> 
+            <h:inputTextarea style="width:250px" disabled="#{grupoUsuarioForm.acao == 'CONSULTAR'}" value="#{grupoUsuarioForm.obsGrupoUsuario}" /> 
+		</h:panelGrid> 
+		<center>
+        	<p:commandButton ajax="false" rendered="#{grupoUsuarioForm.acao != 'CONSULTAR'}" value="Salvar" update="tabelaGrupoUsuario" action="#{grupoUsuarioForm.persistir}"></p:commandButton>
+            <p:commandButton ajax="false" rendered="#{grupoUsuarioForm.acao == 'CONSULTAR'}" value="Voltar" oncomplete="manterGrupoUsuario.hide();"></p:commandButton>
+        </center> 
+        <p:remoteCommand name="updateThis" update="formManterGrupoUsuario"/>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog message="Confirma a exclusão?" width="200" showEffect="explode" hideEffect="explode" header="Atenção" severity="alert" widgetVar="confirma">
+	<center>
+	<h:outputText style="color:red;" value="Atenção: Ao Excluir este grupo você estará excluindo todos seus perfis de acesso!" />
+	<h:form id="formExcluirGrupoUsuario">	
+		<p:commandButton value="Sim" ajax="false" action="#{grupoUsuarioForm.persistir}" oncomplete="confirma.hide()" />
+		<p:commandButton value="Nao" onclick="confirma.hide()" type="button" />
+	</h:form>
+	</center>
+	</p:confirmDialog>
+	
+</ui:composition>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	
+	<p:dialog id="manterUsuario" header="Usuario" widgetVar="manterUsuario" onShow="updateThis();" resizable="false"  width="300" showEffect="blind" hideEffect="blind"> 
+	    <h:form id="formManterUsuario">
+	    <h:panelGrid id="displayUsuario" columns="2">  
+            <h:outputText value="Nome:" />  
+            <h:inputText disabled="#{usuarioForm.acao == 'CONSULTAR'}" value="#{usuarioForm.descUsuario}" /> 
+		</h:panelGrid> 
+		<center>
+        	<p:commandButton ajax="false" rendered="#{usuarioForm.acao != 'CONSULTAR'}" value="Salvar" update="tabelaUsuario" action="#{usuarioForm.persistir}"></p:commandButton>
+            <p:commandButton ajax="false" rendered="#{usuarioForm.acao == 'CONSULTAR'}" value="Voltar" oncomplete="manterUsuario.hide();"></p:commandButton>
+        </center> 
+        <p:remoteCommand name="updateThis" update="formManterUsuario"/>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog message="Confirma a exclusão?" width="200" showEffect="explode" hideEffect="explode" header="Atencao" severity="alert" widgetVar="confirma">
+	<center>
+	<h:form id="formExcluirUsuario">	
+		<p:commandButton value="Sim" ajax="false" action="#{usuarioForm.persistir}" oncomplete="confirma.hide()" />
+		<p:commandButton value="Nao" onclick="confirma.hide()" type="button" />
+	</h:form>
+	</center>
+	</p:confirmDialog>
+	
+</ui:composition>

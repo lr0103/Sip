@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/pages/template/template.xhtml">
+	<ui:define name="body">
+			<center>
+				<p:panel  id="painelManutencao"  style="width:830px; height:500px; overflow:auto; margin-top:60px;" header="Manutenção de Menus" >
+					<h:panelGrid columns="1">
+						<h:panelGroup>
+							<h:form>
+								<p:selectOneMenu effect="drop" value="#{menuSistemaForm.idSistemaSelecionado}" onchange="filtrarMenu();" >
+									<f:selectItems  value="#{menuSistemaForm.listaItemSistema}" />
+								</p:selectOneMenu>
+								<p:remoteCommand name="filtrarMenu"  action="#{menuSistemaForm.filtrarMenu}" update="painelMenu"/>
+							</h:form>
+						</h:panelGroup>
+					</h:panelGrid>
+					<p:spacer height="10"></p:spacer>
+					
+					<h:panelGrid id="painelMenu" style="margin-left:0px" columns="1">					
+						<h:panelGroup>
+							<ui:include src="/pages/geral/direitoacesso/menusistema/manterMenuSistema.xhtml"/>
+						</h:panelGroup>
+					</h:panelGrid>	
+				</p:panel>
+			</center>
+	</ui:define>
+
+</ui:composition>
